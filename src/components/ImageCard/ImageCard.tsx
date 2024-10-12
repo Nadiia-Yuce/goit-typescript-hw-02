@@ -1,7 +1,8 @@
+import { ImageCardProps } from "../../types";
 import css from "./ImageCard.module.css";
 import clsx from "clsx";
 
-export default function ImageCard({ item, onClick }) {
+export default function ImageCard({ item, onClick }: ImageCardProps) {
   return (
     <div className={clsx("animate__animated animate__fadeIn")}>
       <img

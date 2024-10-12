@@ -1,8 +1,9 @@
 import ReactModal from "react-modal";
 import css from "./ImageModal.module.css";
 import clsx from "clsx";
+import { ImageModalProps } from "../../types";
 
-export default function ImageModal({ params, onClose }) {
+export default function ImageModal({ params, onClose }: ImageModalProps) {
   return (
     <ReactModal
       className={clsx(css.modal, params.class)}

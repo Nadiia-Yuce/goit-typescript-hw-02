@@ -7,16 +7,17 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
 import css from "./App.module.css";
+import { Colection, Image, ModalSettings } from "./types";
 
 export default function App() {
-  const [album, setAlbum] = useState([]);
-  const [loader, setLoader] = useState(false);
-  const [error, setError] = useState(false);
+  const [album, setAlbum] = useState<Image[]>([]);
+  const [loader, setLoader] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(999);
-  const [modal, setModal] = useState({
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(999);
+  const [modal, setModal] = useState<ModalSettings>({
     isOpen: false,
     url: "",
     alt: "",
@@ -31,7 +32,8 @@ export default function App() {
       try {
         setLoader(true);
         setError(false);
-        const fetchedColection = await getImages(query, page);
+        const fetchedColection: Colection = await getImages(query, page);
+
         setAlbum(prevColection => [
           ...prevColection,
           ...fetchedColection.images,
@@ -46,7 +48,7 @@ export default function App() {
     getMoreImages();
   }, [query, page]);
 
-  const handleSearch = async newValue => {
+  const handleSearch = async (newValue: string) => {
     setQuery(newValue);
     setPage(1);
     setAlbum([]);
@@ -71,7 +73,7 @@ export default function App() {
     }
   }, [modal.isOpen]);
 
-  const openModal = img => {
+  const openModal = (img: Image) => {
     setModal({
       isOpen: true,
       url: img.urls.regular,

@@ -1,10 +1,13 @@
 import toast, { Toaster } from "react-hot-toast";
 import css from "./SearchBar.module.css";
+import { Submit } from "../../types";
 
-export default function SearchBar({ onSubmit }) {
-  const handleSubmit = evt => {
+export default function SearchBar({ onSubmit }: Submit) {
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const query = evt.target.elements.search.value.trim();
+    const form = evt.target as HTMLFormElement;
+    const input = form.elements.namedItem("search") as HTMLInputElement;
+    const query = input.value.trim();
 
     if (!query) {
       toast("❗️The field can not be empty!", {
